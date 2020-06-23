@@ -1,0 +1,77 @@
+body {
+	background-image: linear-gradient(indigo, black);
+	font-family: Gotham, "Helvetica Neue", Helvetica, Arial, "sans-serif";
+}
+img {
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+}
+#timer_visual {
+	display: block;
+	text-align: center;
+	font-weight: bold;
+	color: rgba(0,0,0,0);
+}
+.form {
+	display: flex;
+	justify-content: center;
+}
+#button_start {
+	background-image: linear-gradient(indigo, indigo);
+	border-color: violet;
+	border-style: outset;
+	color: white;
+	font-weight: bold;
+	text-transform: uppercase;
+}
+#button_start:hover {
+	background-image: linear-gradient(green, darkgreen);
+	border-color: green;
+	color: yellow;
+}
+#button_start:active {
+	background-image: linear-gradient(orange, red);
+	border-color: orange;
+	color: yellow;
+}
+.buttons, #textarea_question {
+	width: 500px;
+	background-image: linear-gradient(cornflowerblue, black);
+	border-style: outset;
+	border-width: 2px;
+	border-color: cornflowerblue;
+	border-radius: 20px;
+	margin: 5px 10px;
+	padding: 5px 10px;
+	text-align: center;
+	font-family: Segoe, "Segoe UI", "DejaVu Sans", "Trebuchet MS", Verdana, "sans-serif";
+	font-size: 1em;
+	color: white;
+}
+.buttons:hover {
+	background-image: linear-gradient(#C8B238, #D18700);
+	border-color: gold;
+	color: black;
+}
+.buttons:active {
+	background-image: linear-gradient(orange, red);
+	border-color: orange;
+	color: yellow;
+}
+#textarea_result {
+	border-style: solid;
+	background-color: black;
+	border-color: black;
+	font-family: Gotham, "Helvetica Neue", Helvetica, Arial, "sans-serif";
+	font-size: 2em;
+	text-align: center;
+	text-transform: uppercase;
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+}
+.copyright {
+	color: silver;
+	text-align: center;
+}

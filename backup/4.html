@@ -1,0 +1,219 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="style.css">
+<link href="https://fonts.googleapis.com/css?family=Press+Start+2P" rel="stylesheet">
+<title>Кто хочет стать миллионером?</title>
+<meta name="description" content="Кто хочет стать миллионером?">
+<meta name="author" content="Виссарионов Дмитрий">
+<script>
+	x = 0;
+	score = 0; // счёт игрока
+	point = new Array(15); // массив матрицы правильных ответов
+	point[0] = new Array("0", "0", "0", "1");
+	point[1] = new Array("0", "0", "0", "1");
+	point[2] = new Array("0", "0", "0", "1");
+	point[3] = new Array("1", "0", "0", "0");
+	point[4] = new Array("0", "1", "0", "0");
+	point[5] = new Array("0", "1", "0", "0");
+	point[6] = new Array("0", "0", "1", "0");
+	point[7] = new Array("0", "1", "0", "0");
+	point[8] = new Array("0", "0", "1", "0");
+	point[9] = new Array("1", "0", "0", "0");
+	point[10] = new Array("0", "0", "1", "0");
+	point[11] = new Array("0", "1", "0", "0");
+	point[12] = new Array("0", "0", "1", "0");
+	point[13] = new Array("1", "0", "0", "0");
+	point[14] = new Array("0", "0", "1", "0");
+	
+	theme = new Array(15); // массив текстов вопросов и четырёх вариантов ответов
+	theme[0] = new Array("Кого крокодил Гена мечтал увидеть за штурвалом голубого вертолета с бесплатным эскимо?", "Деда Мороза", "Снегурочку", "Стюардессу по имени Жанна", "Волшебника");
+	theme[1] = new Array("Оценка новой Москвы Иваном Грозным в фильме «Иван Васильевич меняет профессию»", "Ересь", "Демоны!", "Красота", "Лепота");
+	theme[2] = new Array("Что пытались выведать у Мальчиша-Кибальчиша «прокляты буржуины»?", "Рецепт похудания", "Формулу любви", "Коммерческую тайну", "Военную тайну");
+	theme[3] = new Array("Какая фамилия была у водителя автомобиля «Антилопа Гну» из романа Ильфа и Петрова «Золотой Теленок»?", "Козлевич", "Баранович", "Овцов", "Овсов");
+	theme[4] = new Array("Хозяин голоса, провозгласивший: «Кто ходит в гости по утрам, тот поступает мудро».", "Ливанов", "Леонов", "Панов", "Вицин");
+	theme[5] = new Array("Какой писатель-фантаст придумал три закона робототехники?", "Рэй Брэдбери", "Айзек Азимов", "Иван Ефремов", "Станислав Лем");
+	theme[6] = new Array("Как называется двухместный велосипед?", "Стереопед", "Двуколка", "Тандем", "Биплан");
+	theme[7] = new Array("Как олень привлекает внимание самки в весенний брачный период?", "Воет", "Трубит", "Рычит", "Мычит");
+	theme[8] = new Array("Кто из древних философов, по преданию, жил в бочке?", "Платон", "Сократ", "Диоген", "Демокрит");
+	theme[9] = new Array("Какое из этих слов не произошло от имени собственного?", "Скряга", "Хам", "Хулиган", "Мегера");
+	theme[10] = new Array("По какому предмету Альберт Эйнштейн провалился, поступая в Политехникум Цюриха?", "Математика", "Физика", "Ботаника", "Немецкий язык");
+	theme[11] = new Array("Какая картина Клода Моне дала название новому направлению в живописи - импрессионизму?", "«Дикие маки»", "«Впечатление»", "«Кувшинки»", "«Дама в саду»");
+	theme[12] = new Array("Сколько точек на стандартном кубике игральных костей?", "28", "15", "21", "20");
+	theme[13] = new Array("В каком из этих европейских государств процветает абсолютная монархия?", "Ватикан", "Люксембург", "Монако", "Сан-Марино");
+	theme[14] = new Array("На территории какого современного государства находится легендарная Троя?", "Греция", "Сирия", "Турция", "Италия");
+	
+	function start(quiz) { // функция, в зависимости от номера вопроса quiz, выводит вопрос и варианты ответов в форму на экран
+		document.all.form_quiz.textarea_question.value = ("Вопрос №"+parseInt(x+1)+": "+theme[quiz][0]);
+		document.all.form_quiz.button1.value = ("A: "+theme[quiz][1]);
+		document.all.form_quiz.button2.value = ("B: "+theme[quiz][2]);
+		document.all.form_quiz.button3.value = ("C: "+theme[quiz][3]);
+		document.all.form_quiz.button4.value = ("D: "+theme[quiz][4]);
+	}
+	
+	function proof(y) { // функция проверяет ответ
+		if (point[x][y] == "1") { // если в ячейке строки "x" и столбца "y" содержится "1", то ответ правильный
+			document.form_quiz.textarea_result.value = "Правильно!";
+			document.form_quiz.textarea_result.style.color = "lawngreen";
+			score = score + 1; // увеличиваем счёт игрока
+		}
+		else {
+			document.form_quiz.textarea_result.value = "Неправильно"; // либо пишем, что ответ неправильный
+			document.form_quiz.textarea_result.style.color = "red";
+		}
+		x = x + 1; // переходим к следущему вопросу-ответу
+		time = 60;
+		if (x != 15) { // если вопрос не последний...
+			start(x); // выводим на экран следущий вопрос
+		}
+		else { // иначе выводим надпись о результатах игры и обнуляем все поля и счётчики
+			switch (score) {
+				case 0: document.all.form_quiz.textarea_result.value = ("Ваш выигрыш: 0 рублей"); break
+				case 1: document.all.form_quiz.textarea_result.value = ("Ваш выигрыш: 100 рублей"); break
+				case 2: document.all.form_quiz.textarea_result.value = ("Ваш выигрыш: 200 рублей"); break
+				case 3: document.all.form_quiz.textarea_result.value = ("Ваш выигрыш: 300 рублей"); break
+				case 4: document.all.form_quiz.textarea_result.value = ("Ваш выигрыш: 500 рублей"); break
+				case 5: document.all.form_quiz.textarea_result.value = ("Ваш выигрыш: 1 000 рублей"); break
+				case 6: document.all.form_quiz.textarea_result.value = ("Ваш выигрыш: 2 000 рублей"); break
+				case 7: document.all.form_quiz.textarea_result.value = ("Ваш выигрыш: 4 000 рублей"); break
+				case 8: document.all.form_quiz.textarea_result.value = ("Ваш выигрыш: 8 000 рублей"); break
+				case 9: document.all.form_quiz.textarea_result.value = ("Ваш выигрыш: 16 000 рублей"); break
+				case 10: document.all.form_quiz.textarea_result.value = ("Ваш выигрыш: 32 000 рублей!"); break
+				case 11: document.all.form_quiz.textarea_result.value = ("Ваш выигрыш: 64 000 рублей!"); break
+				case 12: document.all.form_quiz.textarea_result.value = ("Ваш выигрыш: 125 000 рублей!"); break
+				case 13: document.all.form_quiz.textarea_result.value = ("Ваш выигрыш: 250 000 рублей!"); break
+				case 14: document.all.form_quiz.textarea_result.value = ("Ваш выигрыш: 500 000 рублей!!"); break
+				case 15: document.all.form_quiz.textarea_result.value = ("Ваш выигрыш: 1 000 000 рублей!!!"); break
+			}
+			document.all.form_quiz.textarea_result.style.color = "gold";
+			document.all.form_quiz.textarea_question.value = "";
+			document.all.form_quiz.button1.value = "";
+			document.all.form_quiz.button2.value = "";
+			document.all.form_quiz.button3.value = "";
+			document.all.form_quiz.button4.value = "";
+			score = 0;
+			time = "";
+			if (time = "NaN") { // таймер исчезает (делается прозрачным)
+				document.getElementById("time_visual").style.color = "rgba(0,0,0,0)";
+				document.getElementById("timer_visual").style.color = "rgba(0,0,0,0)";
+			}
+		} 
+	}
+	
+						/* Т А Й М Е Р */
+	
+	function timer() { // создаём функцию таймера на 60 секунд
+		time = 60;     
+		var idInt = setInterval(function() {
+			if (time <= 60) { // таймер запускается со значением 60 секунд, надпись и цифры окрашиваются в зелёный (по умолчанию таймер сделан прозрачным через CSS, чтобы его не было видно до начала игры)
+				document.getElementById("time_visual").style.color = "lawngreen";
+				document.getElementById("timer_visual").style.color = "lawngreen";
+			}
+			if (time <= 30) { // когда времени остаётся 30 секунд, надпись и цифры окрашиваются в оранжевый
+				document.getElementById("time_visual").style.color = "orange";
+				document.getElementById("timer_visual").style.color = "orange";
+			}
+			if (time <= 10) { // когда времени остаётся 10 секунд, надпись и цифры окрашиваются в красный
+				document.getElementById("time_visual").style.color = "red";
+				document.getElementById("timer_visual").style.color = "red";
+			}
+			document.getElementById("time_visual").innerHTML = time;
+			if (time <= 0) { // если время закончилось - выводим уведомление и обнуляем все счётчики и поля
+				clearInterval(idInt);
+				alert("Время вышло!");
+				switch (score) {
+					case 0: document.all.form_quiz.textarea_result.value = ("Ваш выигрыш: 0 рублей"); break
+					case 1: document.all.form_quiz.textarea_result.value = ("Ваш выигрыш: 100 рублей"); break
+					case 2: document.all.form_quiz.textarea_result.value = ("Ваш выигрыш: 200 рублей"); break
+					case 3: document.all.form_quiz.textarea_result.value = ("Ваш выигрыш: 300 рублей"); break
+					case 4: document.all.form_quiz.textarea_result.value = ("Ваш выигрыш: 500 рублей"); break
+					case 5: document.all.form_quiz.textarea_result.value = ("Ваш выигрыш: 1 000 рублей"); break
+					case 6: document.all.form_quiz.textarea_result.value = ("Ваш выигрыш: 2 000 рублей"); break
+					case 7: document.all.form_quiz.textarea_result.value = ("Ваш выигрыш: 4 000 рублей"); break
+					case 8: document.all.form_quiz.textarea_result.value = ("Ваш выигрыш: 8 000 рублей"); break
+					case 9: document.all.form_quiz.textarea_result.value = ("Ваш выигрыш: 16 000 рублей"); break
+					case 10: document.all.form_quiz.textarea_result.value = ("Ваш выигрыш: 32 000 рублей!"); break
+					case 11: document.all.form_quiz.textarea_result.value = ("Ваш выигрыш: 64 000 рублей!"); break
+					case 12: document.all.form_quiz.textarea_result.value = ("Ваш выигрыш: 125 000 рублей!"); break
+					case 13: document.all.form_quiz.textarea_result.value = ("Ваш выигрыш: 250 000 рублей!"); break
+					case 14: document.all.form_quiz.textarea_result.value = ("Ваш выигрыш: 500 000 рублей!!"); break
+					case 15: document.all.form_quiz.textarea_result.value = ("Ваш выигрыш: 1 000 000 рублей!!!"); break
+				}
+				document.all.form_quiz.textarea_question.value="";
+				document.all.form_quiz.textarea_result.value="";
+				document.all.form_quiz.button1.value = "";
+				document.all.form_quiz.button2.value = "";
+				document.all.form_quiz.button3.value = "";
+				document.all.form_quiz.button4.value = "";
+				time = 0;
+			}
+			time = time - 1; // время уменьшается на единицу каждые 1000 миллисекунд
+		}, 1000);
+	}
+	
+					/* М У З Ы К А */
+	
+	function play_sound_0() {
+		 var audio = new Audio(); // создаём новый элемент Audio
+		 audio.src = "audio/hello-new-punter-2008-long.mp3"; // указываем путь к аудио
+		 audio.autoplay = true; // автоматически запускаем
+	}
+	
+	function play_sound_1() {
+		 var audio = new Audio(); // создаём новый элемент Audio
+		 audio.src = "audio/lets-see-q1-extra-large.mp3"; // указываем путь к аудио
+		 audio.autoplay = true; // автоматически запускаем
+	}
+</script>
+</head>
+
+<body>
+	<img src="images/logo.png" alt="Логотип" width="500">
+  	<p id="timer_visual">Время: <span id="time_visual"></span></p>
+	<div class="form">
+		<form id="form_quiz" name="form_quiz" action="#" method="post" enctype="text/plain">
+			<table>
+				<caption>
+				<input type="button" id="button_start" name="button_start" class="buttons" value="Начать новую игру" onclick="start(0); timer(); document.getElementById('audio0').play(); document.getElementById('audio1').pause();"> <!-- при нажатии на кнопку стартуют функции вывода вопроса и ответов и начинает тикать таймер /-->
+				</caption>
+				<tr>
+					<th colspan="2">
+						<label>
+							<textarea id="textarea_question" name="textarea_question" rows="3"></textarea>
+						</label>
+					</th>
+				</tr>
+				<tr>
+					<td>
+						<input type="button" id="button1" name="button1" class="buttons" value="A: " onclick="proof(0); document.getElementById('audio1').play(); document.getElementById('audio0').pause();">
+					</td>
+					<td>
+						<input type="button" id="button2" name="button2" class="buttons" value="B: " onclick="proof(0); document.getElementById('audio1').play(); document.getElementById('audio0').pause();">
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<input type="button" id="button3" name="button3" class="buttons" value="C: " onclick="proof(0); document.getElementById('audio1').play(); document.getElementById('audio0').pause();">
+					</td>
+					<td>
+						<input type="button" id="button4" name="button4" class="buttons" value="D: " onclick="proof(0); document.getElementById('audio1').play(); document.getElementById('audio0').pause();">
+					</td>
+				</tr>
+				<tr>
+					<td colspan="2">
+						<textarea id="textarea_result" name="textarea_result" rows="1" cols="50"></textarea>
+					</td>
+				</tr>
+			</table>
+		</form>
+	</div>
+	<audio id="audio0" preload controls>
+		<source src="audio/hello-new-punter-2008-long.mp3" type="audio/mpeg"> <!-- Первый вопрос игры -->
+	</audio>
+	<audio id="audio1" preload controls>
+		<source src="audio/lets-see-q1-extra-large.mp3" type="audio/mpeg"> <!-- Звук начала передачи "Кто хочет стать миллионером?" (заставки) -->
+	</audio>
+	<p class="copyright">Онлайн-игра «Кто хочет стать миллионером?»</p>
+</body>
+</html>

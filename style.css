@@ -1,0 +1,77 @@
+body {
+	background-image: linear-gradient(indigo, black);
+	font-family: Gotham, "Helvetica Neue", Helvetica, Arial, "sans-serif";
+}
+img {
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+}
+#timer_title {
+	display: block;
+	text-align: center;
+	font-weight: bold;
+	color: rgba(0,0,0,0);
+}
+.form {
+	display: flex;
+	justify-content: center;
+}
+#button_start {
+	background-image: linear-gradient(orange, chocolate);
+	border-color: silver;
+	border-style: outset;
+	color: white;
+	font-weight: bold;
+	text-transform: uppercase;
+}
+#button_start:hover {
+	background-image: linear-gradient(yellow, orange);
+	color: black;
+}
+#button_start:active {
+	background-image: linear-gradient(orange, red);
+	color: yellow;
+}
+.buttons, #textarea_question {
+	width: 500px;
+	background-image: linear-gradient(#141489, black);
+	border-style: outset;
+	border-width: 2px;
+	border-color: silver;
+	border-radius: 20px;
+	margin: 5px 10px;
+	padding: 5px 10px;
+	text-align: center;
+	font-family: Segoe, "Segoe UI", "DejaVu Sans", "Trebuchet MS", Verdana, "sans-serif";
+	font-size: 1em;
+	color: white;
+}
+.buttons:hover {
+	background-image: linear-gradient(#C8B238, #D18700);
+	color: black;
+	cursor: pointer;
+}
+.buttons:active {
+	background-image: linear-gradient(orange, red);
+	color: yellow;
+	cursor: wait;
+}
+#button1, #button2, #button3, #button4 {
+	text-align: left;
+}
+#textarea_result, #textarea_money {
+	border-style: solid;
+	background-color: black;
+	border-color: black;
+	font-family: Gotham, "Helvetica Neue", Helvetica, Arial, "sans-serif";
+	font-size: 1.5em;
+	text-align: center;
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+}
+.copyright {
+	color: silver;
+	text-align: center;
+}

@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="style.css">
+<title>Кто хочет стать миллионером?</title>
+<script>
+    function timer() { // запускаем таймер на 60 секунд
+        i = 60;     
+        var idInt = setInterval(function() {
+            if (i <= 10) {
+                document.getElementById("siteTime").style.color = "red";
+            }
+            document.getElementById("siteTime").innerHTML = i;
+            if (i == 0) {
+                clearInterval(idInt);
+                alert("Время вышло!");
+                document.getElementByTagName("p").innerHTML = "Вы опоздали";
+            }
+            i = i - 1;  
+        }, 1000);
+    }
+</script>
+</head>
+
+<body onLoad = "timer();">
+	<p><img src="images/title.jpg" alt="Баннер" width="500"></p>
+  	<p class="timer">Осталось времени: <span id="siteTime"></span></p>
+	<table>
+		<caption>Вопрос №1</caption>
+		<tbody>
+			<tr>
+				<th class="question" colspan="2">
+					Кто был первым ведущим телепередачи "Кто хочет стать миллионером?" на "Первом канале"?
+				</th>
+			</tr>
+			<tr>
+				<td class="answer">
+						<a href="2.html"><span class="letter">A:</span> Галкин</a>
+				</td>
+				<td class="answer">
+					<a href="0.html"><span class="letter">B:</span> Палкин</a>
+				</td>
+			</tr>
+			<tr>
+				<td class="answer">
+					<a href="0.html"><span class="letter">C:</span> Малкин</a>
+				</td>
+				<td class="answer">
+					<a href="0.html"><span class="letter">D:</span> Залкинд</a>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+	<audio autoplay controls>
+		<source src="audio/hello-new-punter-2008-long.mp3" type="audio/mpeg">Первый вопрос игры
+	</audio>
+</body>
+</html>
